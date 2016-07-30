@@ -1,0 +1,139 @@
+<html>
+	
+<head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+	<body>
+		<div class = 'pane'>
+		<h1><center>{{ restaurant.name }}</center></h1>
+		
+		{% with messages = get_flashed_messages() %}
+      {% if messages %}
+          
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% if items !=[] %}
+		  {% if 'username' in session %}
+			<a href = "{{url_for('newMenuItem', restaurant_id = restaurant.id )}}">Create New Menu Item</a>
+		  {% endif %}
+	</br></br>
+
+	<h2><center>Appetizers</center></h2>
+
+		{% for i in items %}
+		{% if i.course == 'Appetizer' %}
+		
+			<p>Item: {{i.name}}</p>    
+			<p>Description: {{i.description}}</p>    
+			<p>Price: {{i.price}}</p> 
+			
+		  {% if 'username' in session %}
+			<a href='{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id=i.id ) }}' >Edit</a>
+		  {% endif %}
+	</br>
+		  {% if 'username' in session %}
+			<a href='{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id=i.id ) }}' >Delete</a>
+		  {% endif %}
+</br>
+</br>
+		{% endif %}
+
+		{% endfor %}
+
+
+		</br></br>
+
+	<h2><center>Entrees</center></h2>
+
+		{% for i in items %}
+		{% if i.course == 'Entree' %}
+
+		
+		<p>Item: {{i.name}}</p>    
+		<p>Description: {{i.description}}</p>    
+		<p>Price: {{i.price}}</p>
+			
+	  {% if 'username' in session %}
+		<a href='{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id=i.id ) }}' >Edit</a>
+	  {% endif %}
+</br>
+	  {% if 'username' in session %}
+		<a href='{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id=i.id ) }}' >Delete</a>
+	  {% endif %}
+</br>
+</br>
+        {% endif %}
+
+		{% endfor %}
+		
+		
+
+		</br></br>
+
+	<h2><center>Desserts</center></h2>
+
+		{% for i in items %}
+		{% if i.course == 'Dessert' %}
+
+		
+		<p>Item: {{i.name}}</p>    
+		<p>Description: {{i.description}}</p>    
+		<p>Price: {{i.price}}</p>
+			
+		  {% if 'username' in session %}
+			<a href='{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id=i.id ) }}' >Edit</a>
+		  {% endif %}
+	</br>
+		  {% if 'username' in session %}
+			<a href='{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id=i.id ) }}' >Delete</a>
+		  {% endif %}
+</br>
+</br>
+		{% endif %}
+
+		{% endfor %}
+		
+		
+
+		</br></br>
+
+	<h2><center>Beverages</center></h2>
+
+		{% for i in items %}
+		{% if i.course == 'Beverage' %}
+
+		
+		<p>Item: {{i.name}}</p>    
+		<p>Description: {{i.description}}</p>    
+		<p>Price: {{i.price}}</p>
+			
+		  {% if 'username' in session %}
+			<a href='{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id=i.id ) }}' >Edit</a>
+		  {% endif %}
+	</br>
+		  {% if 'username' in session %}
+			<a href='{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id=i.id ) }}' >Delete</a>
+		  {% endif %}
+</br>
+</br>
+{% endif %}
+
+		{% endfor %}
+		
+		
+
+		{% else %}
+			<p> You currently have no menu items. <p>
+		  {% if 'username' in session %}
+			<a href = "{{url_for('newMenuItem', restaurant_id = restaurant.id )}}">Create New Item</a>
+		  {% endif %}
+		{% endif %}
+</div>
+	</body>
+</html>

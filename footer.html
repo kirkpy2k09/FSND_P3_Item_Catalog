@@ -1,0 +1,15 @@
+<div class="footer">
+
+		<div class="login">
+		  {% if 'username' in session %}
+			<div class="button"><a href="{{url_for('gdisconnect')}}"><button>Logout</button></a>
+		  {% else %}
+			<div class="button"><a href="{{url_for('login')}}"><button>login</button></a>
+		  {% endif %}
+		</div>
+		
+	<div class="json"><a href="{{url_for('menuitemJSON')}}"><button>JSON API</button></a>
+	</div>
+</div>
+</body>
+</html>
